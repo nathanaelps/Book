@@ -20,7 +20,7 @@ public class Book {
 	private String title;
 	private String author;
 	protected ArrayList<String> pages = new ArrayList<String>();
-
+			
 	public Book(String title, String author, List<String> pages){
 		this.title = title;
 		this.author = author;
@@ -74,6 +74,24 @@ public class Book {
         craftBook.setAmount(1);
                
         return (ItemStack) craftBook;
+    }
+    
+    public void applyToItemStack(ItemStack itemStackToApplyTo){
+    	itemStackToApplyTo.setType(Material.WRITTEN_BOOK);
+    	
+        NBTTagCompound tags = new NBTTagCompound();
+        NBTTagList nPages = new NBTTagList();
+       
+        for(int i=0; i<this.pages.size(); i++){ 
+            nPages.add(new NBTTagString(Integer.toString(i+1),this.pages.get(i)));
+        }
+
+        tags.setString("title",this.title);
+        tags.setString("author",this.author);
+        tags.set("pages", nPages);
+ 
+        ((CraftItemStack) itemStackToApplyTo).getHandle().setTag(tags);
+//        itemStack.setAmount(1);
     }
 
 	public String getTitle(){
