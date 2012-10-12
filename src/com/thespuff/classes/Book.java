@@ -1,3 +1,4 @@
+package com.thespuff.classes;
 /* The Book class.
  * Credit for the class's creation goes to:
  * JamesS237, for clues into the NBTTagCompound.
